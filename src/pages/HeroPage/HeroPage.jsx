@@ -1,10 +1,10 @@
-import { useParams, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+// import { useState } from 'react';
 // import { getHeroById } from '../../services/moviesFetch';
 import { Container } from '@mui/material';
 import BackLink from 'shared/BackLink/BackLink';
 
-const INITIAL_STATE = {};
+// const INITIAL_STATE = {};
 
 // const superman = {
 //   id: 'super',
