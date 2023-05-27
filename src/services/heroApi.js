@@ -20,6 +20,7 @@ const postHero = async data => {
     const { data: result } = await instance.post('/', data, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
+    console.log('🆑  result:', result);
     return result;
   } catch (error) {
     throw error;

@@ -16,8 +16,10 @@ export const getHeroes = createAsyncThunk(
 export const addHero = createAsyncThunk(
   'heroes/postHero',
   async (hero, { rejectWithValue }) => {
+    console.log('🆑 operat hero:', hero);
+
     try {
-      const { data } = await superHeroesAPI.postHero(hero);
+      const data = await superHeroesAPI.postHero(hero);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);

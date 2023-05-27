@@ -29,7 +29,9 @@ const heroSlice = createSlice({
 
       // ------- addHero -------
       .addCase(heroesService.addHero.fulfilled, (state, { payload }) => {
-        state.games = [payload, ...state.games];
+        console.log('🆑  payload:', payload);
+
+        state.heroes = [payload, ...state.heroes];
       })
 
       // ------- changeHeroById -------
