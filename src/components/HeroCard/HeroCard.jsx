@@ -7,27 +7,26 @@ import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
-export default function HeroCrad({
-  title = 'Superman',
-  id = '12345',
-  poster = '',
-}) {
+const IMAGE_URL = 'http://localhost:3001/'; // write to .env
+
+export default function HeroCrad({ hero = {} }) {
   const location = useLocation();
 
+  const { nickname, images, _id } = hero;
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
         alt="hero photo"
         height="320"
-        image={require('assets/img/superman.jpg')}
+        image={`${IMAGE_URL}${images[0]}`}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {title}
+          {nickname}
         </Typography>
       </CardContent>
-      <Link key={id} to={`/hero/${id}`} state={{ from: location }}>
+      <Link to={`/hero/${_id}`} state={{ from: location }}>
         <Button size="small">Learn More</Button>
       </Link>
     </Card>
