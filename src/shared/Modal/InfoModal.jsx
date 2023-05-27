@@ -1,5 +1,5 @@
 import React from 'react';
-import Box from '@mui/material/Box';
+import { Box, Typography } from '@mui/material';
 import Modal from '@mui/material/Modal';
 
 const style = {
@@ -13,6 +13,10 @@ const style = {
   borderRadius: '10px',
   boxShadow: 24,
   p: '20px',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
 };
 
 const InfoModal = ({ open, onClose = () => {}, children, title = '' }) => {
@@ -24,7 +28,12 @@ const InfoModal = ({ open, onClose = () => {}, children, title = '' }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>{children}</Box>
+        <Box sx={style}>
+          <Typography variant="h5" sx={{ marginBottom: '50px' }}>
+            {title}
+          </Typography>
+          <Box>{children}</Box>
+        </Box>
       </Modal>
     </div>
   );
