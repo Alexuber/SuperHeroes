@@ -45,6 +45,8 @@ const editHeroById = async data => {
 };
 
 const deleteHeroById = async id => {
+  console.log('🆑  id:', id);
+
   try {
     const { data } = await instance.delete(`/${id}`);
     return data;

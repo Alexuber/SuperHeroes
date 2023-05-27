@@ -29,7 +29,7 @@ const heroSlice = createSlice({
 
       // ------- addHero -------
       .addCase(heroesService.addHero.fulfilled, (state, { payload }) => {
-        state.games = [payload, ...state.games];
+        state.heroes = [payload, ...state.heroes];
       })
 
       // ------- changeHeroById -------
@@ -41,7 +41,8 @@ const heroSlice = createSlice({
 
       // ------- removeHero -------
       .addCase(heroesService.removeHero.fulfilled, (state, { payload }) => {
-        state.heroes = state.heroes.filter(game => game.id !== payload);
+        console.log('🆑  payload:', payload);
+        state.heroes = state.heroes.filter(hero => hero._id !== payload);
       })
 
       .addMatcher(isAnyOf(...getActions('pending')), pendingHandler)

@@ -5,20 +5,12 @@ import ListItemText from '@mui/material/ListItemText';
 import HeroCard from 'components/HeroCard/HeroCard';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectAllHeroes, selectIsLoading } from 'redux/hero/hero-selectors';
-import { useEffect } from 'react';
-import { getHeroes } from 'redux/hero/hero-operations';
+import { useSelector } from 'react-redux';
+import { selectIsLoading } from 'redux/hero/hero-selectors';
 import { Loader } from 'shared/Loader/Loader';
 
-export default function HeroesList() {
-  const heroes = useSelector(selectAllHeroes);
+export default function HeroesList({ heroes }) {
   const isLoading = useSelector(selectIsLoading);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getHeroes());
-  }, [dispatch]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>

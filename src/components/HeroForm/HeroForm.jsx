@@ -2,6 +2,8 @@ import React from 'react';
 import { Button } from '@mui/material';
 import { Formik, Form, Field, FieldArray, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { addHero } from 'redux/hero/hero-operations';
 
 const regEx = /^[A-Za-z\s]+$/;
 
@@ -18,9 +20,12 @@ const validationSchema = Yup.object({
     .required('Real name is a required field'),
   origin_description: Yup.string()
     .min(3, '3 characters minimum')
-    .max(300, '300 characters maximum')
-    .matches(regEx, 'English letters only')
+    .max(600, '600 characters maximum')
     .required('Description is a required field'),
+  catch_phrase: Yup.string()
+    .min(3, '3 characters minimum')
+    .max(600, '100 characters maximum')
+    .required('Catch phrase is a required field'),
   superpowers: Yup.array()
     .of(
       Yup.string()
@@ -38,10 +43,10 @@ const validationSchema = Yup.object({
           for (let i = 0; i < value.length; i++) {
             const file = value[i];
             const supportedFormats = [
-              'image/jpeg',
+              //   'image/jpeg',
               'image/jpg',
-              'image/png',
-              'image/webp',
+              //   'image/png',
+              //   'image/webp',
             ];
             const isValidFormat = supportedFormats.includes(file.type);
             if (!isValidFormat) {
@@ -57,22 +62,58 @@ const validationSchema = Yup.object({
 });
 
 const HeroForm = () => {
-  const handleSubmit = async values => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = async (values, form) => {
     const { images, ...rest } = values;
     const formData = new FormData();
 
-    Object.values(images).forEach(file => {
+    for (const file of Object.values(images)) {
       formData.append('images', file);
-    });
+    }
 
     Object.entries(rest).forEach(([fieldName, fieldValue]) => {
       formData.append(fieldName, fieldValue);
     });
 
-    console.log('FormData contents:');
-    for (const pair of formData.entries()) {
-      console.log(pair[0], pair[1]);
+    // console.log('FormData contents:');
+    // for (const pair of formData.entries()) {
+    //   console.log(pair[0], pair[1]);
+    // }
+    sendHero(formData);
+    form.resetForm();
+  };
+
+  const sendHero = data => {
+    const nickname = data.get('nickname');
+    const real_name = data.get('real_name');
+    const origin_description = data.get('origin_description');
+    const catch_phrase = data.get('catch_phrase');
+    const superpowers = data.getAll('superpowers');
+    const images = getFiles(data, 'images');
+
+    const formData = {
+      nickname,
+      real_name,
+      origin_description,
+      catch_phrase,
+      superpowers,
+      images,
+    };
+
+    console.log('🆑  formData:', formData);
+    dispatch(addHero(formData));
+  };
+
+  const getFiles = (formData, field) => {
+    const files = [];
+    const fileList = formData.getAll(field);
+
+    for (let i = 0; i < fileList.length; i++) {
+      files.push(fileList[i]);
     }
+
+    return files;
   };
 
   return (
@@ -81,6 +122,7 @@ const HeroForm = () => {
         nickname: '',
         real_name: '',
         origin_description: '',
+        catch_phrase: '',
         superpowers: [],
         images: [],
       }}
@@ -137,6 +179,21 @@ const HeroForm = () => {
               style={{ color: 'red' }}
             />
           </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <label htmlFor="catch_phrase">Catch phrase</label>
+            <Field
+              as="textarea"
+              id="catch_phrase"
+              name="catch_phrase"
+              style={{ width: '100%', padding: '0.5rem' }}
+            />
+            <ErrorMessage
+              name="catch_phrase"
+              component="div"
+              style={{ color: 'red' }}
+            />
+          </div>
+
           <div style={{ marginBottom: '1rem' }}>
             <label>Superpowers</label>
             <FieldArray name="superpowers">

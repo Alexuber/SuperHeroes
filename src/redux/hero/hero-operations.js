@@ -17,7 +17,7 @@ export const addHero = createAsyncThunk(
   'heroes/postHero',
   async (hero, { rejectWithValue }) => {
     try {
-      const { data } = await superHeroesAPI.postHero(hero);
+      const data = await superHeroesAPI.postHero(hero);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -52,6 +52,8 @@ export const changeHeroById = createAsyncThunk(
 export const removeHero = createAsyncThunk(
   'heroes/removeHero',
   async (id, { rejectWithValue }) => {
+    console.log('🆑  id:', id);
+
     try {
       await superHeroesAPI.deleteHeroById(id);
       return id;
