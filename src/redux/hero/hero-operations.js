@@ -5,7 +5,7 @@ export const getHeroes = createAsyncThunk(
   'heroes/getHeroes',
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await superHeroesAPI.fetchAllHeroes();
+      const data = await superHeroesAPI.fetchAllHeroes();
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -25,7 +25,7 @@ export const addHero = createAsyncThunk(
   }
 );
 
-export const findheroById = createAsyncThunk(
+export const findHeroById = createAsyncThunk(
   'heroes/findheroById',
   async (id, { rejectWithValue }) => {
     try {

@@ -1,12 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-// import { pollReducer } from "./poll/pollSlice";
-// import { quizReducer } from "./quiz/quizSlice";
-// import { controlReducer } from "./control/controlSlice";
+import { heroesReducer } from './heroSlice';
 
-// export const store = configureStore({
-//   reducer: {
-//     pollData: pollReducer,
-//     control: controlReducer,
-//     quizData: quizReducer,
-//   },
-// });
+export const store = configureStore({
+  reducer: {
+    heroesData: heroesReducer,
+  },
+});
