@@ -54,6 +54,7 @@ export const removeHero = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       await superHeroesAPI.deleteHeroById(id);
+      console.log('🆑  id:', id);
       return id;
     } catch (error) {
       return rejectWithValue(error.message);

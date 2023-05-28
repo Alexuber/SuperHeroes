@@ -1,21 +1,23 @@
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { removeHero, removeImgById } from 'redux/hero/hero-operations';
-import InfoModal from 'shared/Modal/InfoModal';
+import InfoModal from 'shared/components/Modal/InfoModal';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import HeroForm from 'components/HeroForm/HeroForm';
 import { useSelector } from 'react-redux';
-import { selectHeroById } from 'redux/hero/hero-selectors';
+import { selectHeroById, selectError } from 'redux/hero/hero-selectors';
+import notify from 'utils/notify';
+import { useSelect } from '@mui/base';
 
 const HeroOptions = ({ selectedImage }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteImgModalOpen, setIsDeleteImgModalOpen] = useState(false);
-
+  const isError = useSelector(selectError);
   const dispatch = useDispatch();
   const { id } = useParams();
   const selectedHero = useSelector(state => selectHeroById(state, id));
@@ -24,13 +26,23 @@ const HeroOptions = ({ selectedImage }) => {
 
   const handleDeleteHero = async () => {
     await dispatch(removeHero(id));
+    if (!isError) {
+      notify('success', 'SuperHero deleted!');
+    } else {
+      notify('error', isError);
+    }
     setIsDeleteModalOpen(false);
     navigate('/');
   };
 
-  const handleDeleteImg = () => {
+  const handleDeleteImg = async () => {
     const data = { id, selectedImage };
-    dispatch(removeImgById(data));
+    await dispatch(removeImgById(data));
+    if (!isError) {
+      notify('success', 'Image deleted!');
+    } else {
+      notify('error', isError);
+    }
     setIsDeleteImgModalOpen(false);
   };
 
@@ -38,13 +50,17 @@ const HeroOptions = ({ selectedImage }) => {
     setIsEditModalOpen(false);
   };
   return (
-    <>
+    <Box sx={{ padding: '60px' }}>
+      <Typography sx={{ textAlign: 'center' }} variant="h4">
+        Options
+      </Typography>
       <Box
         sx={{
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           gap: '20px',
+          marginTop: '60px',
         }}
       >
         <Button
@@ -54,7 +70,7 @@ const HeroOptions = ({ selectedImage }) => {
           startIcon={<DeleteIcon />}
           onClick={() => setIsDeleteModalOpen(true)}
         >
-          Delete
+          Hero
         </Button>
         <Button
           variant="contained"
@@ -132,7 +148,7 @@ const HeroOptions = ({ selectedImage }) => {
           handleSubmitEditHero={handleSubmitEditHero}
         />
       </InfoModal>
-    </>
+    </Box>
   );
 };
 

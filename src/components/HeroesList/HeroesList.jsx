@@ -1,15 +1,13 @@
 import * as React from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import HeroCard from 'components/HeroCard/HeroCard';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectIsLoading } from 'redux/hero/hero-selectors';
-import { Loader } from 'shared/Loader/Loader';
+import { Loader } from 'shared/components/Loader/Loader';
+import HeroCard from 'components/HeroCard/HeroCard';
+import { List, ListItem, ListItemText, Box, Grid } from '@mui/material';
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 
-export default function HeroesList({ heroes }) {
+export default function HeroesList({ heroes = [] }) {
   const isLoading = useSelector(selectIsLoading);
 
   return (
@@ -26,46 +24,34 @@ export default function HeroesList({ heroes }) {
             </List>
           </Grid>
         ))}
-        {/* <Grid item xs={12} sm={6} md={4} lg={3}>
-          <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-            <ListItem sx={{ display: 'flex', flexDirection: 'column' }}>
-              <HeroCard />
-              <ListItemText />
-            </ListItem>
-          </List>
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={4}
+          lg={3}
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Box>
+            <NavLink to="/addSuperHero">
+              <LibraryAddIcon
+                sx={{
+                  width: '180px',
+                  height: '180px',
+                  '&:hover': { color: 'red' },
+                  '&:focus': {
+                    outline: 'none',
+                    boxShadow: '0 0 3px 3px rgba(0, 0, 0, 0.2)',
+                  },
+                }}
+              />
+            </NavLink>
+          </Box>
         </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-            <ListItem sx={{ display: 'flex', flexDirection: 'column' }}>
-              <HeroCard />
-              <ListItemText />
-            </ListItem>
-          </List>
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-            <ListItem sx={{ display: 'flex', flexDirection: 'column' }}>
-              <HeroCard />
-              <ListItemText />
-            </ListItem>
-          </List>
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-            <ListItem sx={{ display: 'flex', flexDirection: 'column' }}>
-              <HeroCard />
-              <ListItemText />
-            </ListItem>
-          </List>
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-            <ListItem sx={{ display: 'flex', flexDirection: 'column' }}>
-              <HeroCard />
-              <ListItemText />
-            </ListItem>
-          </List>
-        </Grid> */}
       </Grid>
     </Box>
   );

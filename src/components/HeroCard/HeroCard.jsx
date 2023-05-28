@@ -1,13 +1,15 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Button,
+  Typography,
+} from '@mui/material/';
 
-const IMAGE_URL = 'http://localhost:3001/'; // write to .env
+const IMAGE_URL = 'https://super-hero-ihdu.onrender.com/';
 
 export default function HeroCrad({ hero = {} }) {
   const location = useLocation();

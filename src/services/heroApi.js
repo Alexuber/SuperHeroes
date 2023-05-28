@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3001/api/heroes';
+const BASE_URL = 'https://super-hero-ihdu.onrender.com/api/heroes';
 
 const instance = axios.create({
   baseURL: BASE_URL,
@@ -35,7 +35,7 @@ const fetchHeroById = async id => {
   }
 };
 
-const editHeroById = async (data, id) => {
+const editHeroById = async data => {
   try {
     const { data: result } = await instance.put(`/${data.id}`, data.formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
@@ -47,9 +47,11 @@ const editHeroById = async (data, id) => {
 };
 
 const deleteHeroById = async id => {
+  console.log('🆑  id:', id);
+
   try {
-    const { data } = await instance.delete(`/${id}`);
-    return data;
+    await instance.delete(`/${id}`);
+    return id;
   } catch (error) {
     throw error;
   }

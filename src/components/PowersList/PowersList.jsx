@@ -10,13 +10,22 @@ import { Box, Typography } from '@mui/material';
 export default function PowersList({ powers }) {
   return (
     <Box>
-      <Typography>Super powers:</Typography>
-      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+      <Typography sx={{ marginTop: '35px', textAlign: 'center' }} variant="h5">
+        Super powers:
+      </Typography>
+      <List
+        sx={{
+          width: '100%',
+          maxWidth: 360,
+          bgcolor: 'background.paper',
+          margin: '0 auto',
+        }}
+      >
         {powers.map((power, index) => (
           <ListItem key={index}>
             <ListItemAvatar>
-              <Avatar>
-                <BoltIcon />
+              <Avatar sx={{ width: '25px', height: '25px' }}>
+                <BoltIcon sx={{ fill: 'yellow' }} />
               </Avatar>
             </ListItemAvatar>
             <ListItemText primary={power} />

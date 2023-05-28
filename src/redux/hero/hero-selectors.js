@@ -1,4 +1,6 @@
 export const selectIsLoading = state => state.heroesData.isLoading;
+export const selectIsError = state => state.heroesData.error;
+
 export const selectError = state => state.heroesData.error;
 
 export const selectAllHeroes = state => state.heroesData.heroes;

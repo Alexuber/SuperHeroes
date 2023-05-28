@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import InfoModal from 'shared/Modal/InfoModal';
+import InfoModal from 'shared/components/Modal/InfoModal';
 
 const ModalContent = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

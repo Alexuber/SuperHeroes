@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { Container } from '@mui/material';
-import BackLink from 'shared/BackLink/BackLink';
+import BackLink from 'shared/components/BackLink/BackLink';
 import Slider from 'components/Slider/Slider';
 import HeroInfo from 'components/HeroInfo/HeroInfo';
 import { useSelector } from 'react-redux';
@@ -16,8 +16,10 @@ const HeroPage = () => {
   const superHero = useSelector(state => selectHeroById(state, id));
 
   useEffect(() => {
-    SetSelectedImage(superHero.images[0]);
-  }, [superHero.images]);
+    if (superHero && superHero.images && superHero.images.length > 0) {
+      SetSelectedImage(superHero.images[0]);
+    }
+  }, [superHero]);
 
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/';
@@ -31,7 +33,7 @@ const HeroPage = () => {
   }
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="lg">
       <main>
         <BackLink to={backLinkHref}>Back</BackLink>
         <HeroInfo hero={superHero} />

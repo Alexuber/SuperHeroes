@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import BackLink from 'shared/BackLink/BackLink';
+import BackLink from 'shared/components/BackLink/BackLink';
 import { Container } from '@mui/material';
 import HeroForm from 'components/HeroForm/HeroForm';
 
@@ -8,7 +8,7 @@ const AddSuperHeroPage = () => {
   const backLinkHref = location.state?.from ?? '/';
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="lg">
       <main>
         <BackLink to={backLinkHref}>Back</BackLink>
         <HeroForm />

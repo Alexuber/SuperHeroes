@@ -1,10 +1,12 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
-import { Loader } from 'shared/Loader/Loader';
+import { Loader } from 'shared/components/Loader/Loader';
 import UserBar from './Userbar/UserBar';
 import { useEffect } from 'react';
 import { getHeroes } from 'redux/hero/hero-operations';
 import { useDispatch } from 'react-redux';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const HeroPage = lazy(() => import('../pages/HeroPage/HeroPage'));
@@ -28,6 +30,7 @@ export const App = () => {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Suspense>
+      <ToastContainer position="top-right" autoClose={3000} theme="dark" />
     </>
   );
 };
