@@ -1,19 +1,18 @@
-import HeroesList from 'components/HeroesList/HeroesList';
-import Container from '@mui/material/Container';
-import BasicPagination from 'components/Pagination/Pagination';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import HeroesList from 'components/HeroesList/HeroesList';
+import BasicPagination from 'components/Pagination/Pagination';
+import { Typography, Box, Container } from '@mui/material';
 import { selectAllHeroes } from 'redux/hero/hero-selectors';
-import { Typography } from '@mui/material';
+import banner from 'assets/img/banner.webp';
 
 const HomePage = () => {
-  const [currentPageHeroes, setCurrentPageHeroes] = useState([]);
   const allHeroes = useSelector(selectAllHeroes);
+  const [currentPageHeroes, setCurrentPageHeroes] = useState([]);
   const heroesPerPage = 5;
   const countOfPages = allHeroes.length
     ? Math.ceil(allHeroes.length / heroesPerPage)
     : 1;
-
   const handleChange = (_, value) => {
     const startIndex = (value - 1) * heroesPerPage;
     const endIndex = startIndex + heroesPerPage;
@@ -26,26 +25,33 @@ const HomePage = () => {
 
   return (
     <Container
-      maxWidth="xl"
-      style={{ position: 'relative', minHeight: '100vh' }}
+      maxWidth="lg"
+      sx={{ position: 'relative', minHeight: '100vh', marginBottom: '60px' }}
     >
       <main>
+        <img src={banner} alt="banner superheroes" width="100%" />
         <Typography
           variant="h4"
           sx={{
             textAlign: 'center',
             margin: '30px 0',
             textTransform: 'uppercase',
+            display: 'block',
+            height: '50px',
+            color: 'white',
+            background: 'rgb(25,33,251)',
+            background:
+              'linear-gradient(90deg, rgba(25,33,251,1) 0%, rgba(255,0,168,1) 100%)',
           }}
         >
           All your favorite heroes here!
         </Typography>
         <HeroesList heroes={currentPageHeroes} />
       </main>
-      <div
-        style={{
+      <Box
+        sx={{
           position: 'absolute',
-          bottom: 20,
+          bottom: -30,
           left: '50%',
           transform: 'translateX(-50%)',
         }}
@@ -54,7 +60,7 @@ const HomePage = () => {
           handleChange={handleChange}
           countOfPages={countOfPages}
         />
-      </div>
+      </Box>
     </Container>
   );
 };

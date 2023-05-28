@@ -1,14 +1,12 @@
-import { useLocation } from 'react-router-dom';
-import { Container } from '@mui/material';
-import BackLink from 'shared/BackLink/BackLink';
+import { useLocation, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Container, Typography } from '@mui/material';
+import BackLink from 'shared/components/BackLink/BackLink';
 import Slider from 'components/Slider/Slider';
 import HeroInfo from 'components/HeroInfo/HeroInfo';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { selectHeroById } from 'redux/hero/hero-selectors';
 import HeroOptions from 'components/HeroOptions/HeroOptions';
-import { Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { selectHeroById } from 'redux/hero/hero-selectors';
 
 const HeroPage = () => {
   const [selectedImage, SetSelectedImage] = useState('');
@@ -16,8 +14,10 @@ const HeroPage = () => {
   const superHero = useSelector(state => selectHeroById(state, id));
 
   useEffect(() => {
-    SetSelectedImage(superHero.images[0]);
-  }, [superHero.images]);
+    if (superHero && superHero.images && superHero.images.length > 0) {
+      SetSelectedImage(superHero.images[0]);
+    }
+  }, [superHero]);
 
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/';
@@ -31,7 +31,7 @@ const HeroPage = () => {
   }
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="lg">
       <main>
         <BackLink to={backLinkHref}>Back</BackLink>
         <HeroInfo hero={superHero} />

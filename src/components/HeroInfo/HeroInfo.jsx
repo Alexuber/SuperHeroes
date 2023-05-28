@@ -1,8 +1,10 @@
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { Box, Typography } from '@mui/material';
-import styles from './HeroInfo.module.scss';
 import PowersList from 'components/PowersList/PowersList';
+import styles from './HeroInfo.module.scss';
 
-const IMAGE_BASE_URL = 'http://localhost:3001/';
+const IMAGE_BASE_URL = 'https://super-hero-ihdu.onrender.com/';
 
 const HeroInfo = ({ hero }) => {
   const {
@@ -13,39 +15,53 @@ const HeroInfo = ({ hero }) => {
     catch_phrase,
     images,
   } = hero;
+  const theme = useTheme();
+  const isScreenWidthLessThan800 = useMediaQuery(theme.breakpoints.down('md'));
   return (
-    <Box>
-      <Typography className={styles.heroNickname}>{nickname}</Typography>
+    <Box sx={{ marginBottom: '60px' }}>
+      <Typography
+        sx={{ textAlign: 'center', marginBottom: '60px' }}
+        variant="h3"
+      >
+        About
+      </Typography>
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
+          justifyContent: 'start',
+          alignItems: 'start',
+          gap: '80px',
+          padding: '0 50px',
+          flexDirection: isScreenWidthLessThan800 ? 'column' : 'row',
         }}
       >
         <img
-          className={styles.mainImg}
           src={`${IMAGE_BASE_URL}${images[0]}`}
           alt="main hero avatar"
           width="320px"
           height="480px"
+          style={{ borderRadius: '8px' }}
         />
-        <Box>
-          <Typography className={styles.heroInfoItem}>
-            Nickname: {nickname}
+        <Box sx={{ width: '100%' }}>
+          <Typography sx={{ marginBottom: '10px' }} variant="h5">
+            <span className={styles.subTitle}>Nickname:</span>
+            <span className={styles.desc}> {nickname}</span>
           </Typography>
-          <Typography className={styles.heroInfoItem}>
-            Real name: {real_name}
+          <Typography sx={{ marginBottom: '10px' }} variant="h5">
+            <span className={styles.subTitle}>Real name:</span>
+            <span className={styles.desc}>{real_name}</span>
           </Typography>
-          <Typography className={styles.heroInfoItem}>
-            Description: {origin_description}
+          <Typography sx={{ marginBottom: '10px' }} variant="h5">
+            <span className={styles.subTitle}>Description:</span>
+            <span className={styles.desc}>{origin_description}</span>
           </Typography>
-          <PowersList powers={superpowers} />
+          <Typography sx={{ marginTop: '20px' }} variant="h5">
+            <span className={styles.subTitle}>Catch phrase:</span>
+            <span className={styles.desc}>{catch_phrase}</span>
+          </Typography>
         </Box>
       </Box>
-      <Typography className={styles.catchPhrase}>
-        Catch phrase: {catch_phrase}
-      </Typography>
+      <PowersList powers={superpowers} />
     </Box>
   );
 };

@@ -1,15 +1,15 @@
-import { NavLink } from 'react-router-dom';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import styles from './Menu.module.scss';
-import { useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import { Menu, Box } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
+import styles from './Menu.module.scss';
 
 export default function BasicMenu() {
   const location = useLocation();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
@@ -18,7 +18,7 @@ export default function BasicMenu() {
   };
 
   return (
-    <div>
+    <Box>
       <MenuIcon
         sx={{ mr: 2, cursor: 'pointer' }}
         id="basic-button"
@@ -51,6 +51,6 @@ export default function BasicMenu() {
           </MenuItem>
         )}
       </Menu>
-    </div>
+    </Box>
   );
 }

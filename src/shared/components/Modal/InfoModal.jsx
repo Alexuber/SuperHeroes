@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Typography } from '@mui/material';
 import Modal from '@mui/material/Modal';
 
@@ -20,11 +19,6 @@ const style = {
 };
 
 const InfoModal = ({ open, onClose = () => {}, children, title = '' }) => {
-  // const handleBackdropClick = ({ target, currentTarget, code }) => {
-  //   if (target !== currentTarget || code === 'Escape') {
-  //     onClose();
-  //   }
-  // };
   return (
     <div>
       <Modal
