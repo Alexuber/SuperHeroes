@@ -47,8 +47,6 @@ const editHeroById = async data => {
 };
 
 const deleteHeroById = async id => {
-  console.log('🆑  id:', id);
-
   try {
     await instance.delete(`/${id}`);
     return id;
@@ -63,7 +61,7 @@ const deleteImageById = async data => {
     .replace('images', '');
 
   try {
-    await instance.delete(`/${data.id}/images/${modifiedSelectedImage}`);
+    await instance.delete(`${data.id}/images${modifiedSelectedImage}`);
     return data;
   } catch (error) {
     throw error;

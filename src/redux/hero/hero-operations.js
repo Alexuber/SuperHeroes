@@ -73,10 +73,3 @@ export const removeImgById = createAsyncThunk(
     }
   }
 );
-// export const superHeroesAPI = {
-//     fetchAllHeroes,
-//     fetchHeroById,
-//     editHeroById,
-//     deleteHeroById,
-//     deleteImageById,
-//   };

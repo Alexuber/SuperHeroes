@@ -1,12 +1,11 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Suspense, lazy } from 'react';
-import { Loader } from 'shared/components/Loader/Loader';
-import UserBar from './Userbar/UserBar';
-import { useEffect } from 'react';
-import { getHeroes } from 'redux/hero/hero-operations';
+import { Suspense, lazy, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import 'react-toastify/dist/ReactToastify.css';
+import UserBar from './Userbar/UserBar';
+import { getHeroes } from 'redux/hero/hero-operations';
+import { Loader } from 'shared/components/Loader/Loader';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const HeroPage = lazy(() => import('../pages/HeroPage/HeroPage'));

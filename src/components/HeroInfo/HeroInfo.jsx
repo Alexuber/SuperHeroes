@@ -1,8 +1,8 @@
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { Box, Typography } from '@mui/material';
 import PowersList from 'components/PowersList/PowersList';
 import styles from './HeroInfo.module.scss';
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
 
 const IMAGE_BASE_URL = 'https://super-hero-ihdu.onrender.com/';
 

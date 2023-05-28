@@ -6,41 +6,10 @@ import { selectIsError, selectIsLoading } from 'redux/hero/hero-selectors';
 import { Loader } from 'shared/components/Loader/Loader';
 import { Button, Typography, Box } from '@mui/material';
 import { addHero, changeHeroById } from 'redux/hero/hero-operations';
-import * as Yup from 'yup';
 import notify from 'utils/notify';
 import validateImages from 'utils/validateImages';
-
-const regEx = /^[A-Za-z\s]+$/;
-
-const validationSchema = Yup.object({
-  nickname: Yup.string()
-    .min(3, '3 characters minimum')
-    .max(30, '30 characters maximum')
-    .matches(regEx, 'English letters only')
-    .required('Nickname is a required field'),
-  real_name: Yup.string()
-    .min(3, '3 characters minimum')
-    .max(30, '30 characters maximum')
-    .matches(regEx, 'English letters only')
-    .required('Real name is a required field'),
-  origin_description: Yup.string()
-    .min(3, '3 characters minimum')
-    .max(1000, '1000 characters maximum')
-    .required('Description is a required field'),
-  catch_phrase: Yup.string()
-    .min(3, '3 characters minimum')
-    .max(600, '100 characters maximum')
-    .required('Catch phrase is a required field'),
-  superpowers: Yup.array()
-    .of(
-      Yup.string()
-        .min(3, '3 characters minimum')
-        .max(50, '50 characters maximum')
-        .label('Superpower')
-    )
-    .required('Superpowers are required')
-    .min(1, 'Please add at least one superpower'),
-});
+import getFormDataFiles from 'utils/getFormDataFiles';
+import { validationSchema } from 'utils/validationSchema';
 
 const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
   const isError = useSelector(selectIsError);
@@ -66,18 +35,6 @@ const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
       }
     }
     validateImages(images, form);
-    // for (let i = 0; i < images.length; i++) {
-    //   const file = images[i];
-    //   const supportedFormats = ['image/jpg', 'image/jpeg', 'image/png'];
-    //   if (!supportedFormats.includes(file.type)) {
-    //     form.setFieldError(
-    //       'images',
-    //       'Invalid file format. Only JPG, JPEG, PNG, and WEBP formats are allowed.'
-    //     );
-    //     return;
-    //   }
-    // }
-
     await sendHero(formData);
     if (!isError) {
       notify('success', 'Success!');
@@ -93,7 +50,7 @@ const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
     const origin_description = data.get('origin_description');
     const catch_phrase = data.get('catch_phrase');
     const superpowers = data.get('superpowers').split(',');
-    const images = getFiles(data, 'images');
+    const images = getFormDataFiles(data, 'images');
 
     const formData = {
       nickname,
@@ -119,18 +76,6 @@ const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
 
   const addNewHero = async formData => {
     await dispatch(addHero(formData));
-  };
-
-  const getFiles = (formData, field) => {
-    const files = [];
-
-    const fileList = formData.getAll(field);
-
-    for (let i = 0; i < fileList.length; i++) {
-      files.push(fileList[i]);
-    }
-
-    return files;
   };
 
   return (

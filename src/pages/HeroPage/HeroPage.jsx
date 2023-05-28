@@ -1,14 +1,12 @@
-import { useLocation } from 'react-router-dom';
-import { Container } from '@mui/material';
+import { useLocation, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Container, Typography } from '@mui/material';
 import BackLink from 'shared/components/BackLink/BackLink';
 import Slider from 'components/Slider/Slider';
 import HeroInfo from 'components/HeroInfo/HeroInfo';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { selectHeroById } from 'redux/hero/hero-selectors';
 import HeroOptions from 'components/HeroOptions/HeroOptions';
-import { Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { selectHeroById } from 'redux/hero/hero-selectors';
 
 const HeroPage = () => {
   const [selectedImage, SetSelectedImage] = useState('');

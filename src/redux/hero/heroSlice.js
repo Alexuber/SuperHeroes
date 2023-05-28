@@ -33,9 +33,7 @@ const heroSlice = createSlice({
         }
       })
       .addCase(heroesService.removeHero.fulfilled, (state, { payload }) => {
-        console.log('🆑  payload:', payload);
         state.heroes = state.heroes.filter(hero => hero._id !== payload);
-        console.log('state.her -->', state.heroes);
       })
       .addCase(heroesService.removeImgById.fulfilled, (state, { payload }) => {
         const { id, selectedImage } = payload;

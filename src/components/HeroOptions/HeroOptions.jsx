@@ -1,23 +1,20 @@
+import { useParams, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import InfoModal from 'shared/components/Modal/InfoModal';
+import HeroForm from 'components/HeroForm/HeroForm';
 import { Box, Button, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { removeHero, removeImgById } from 'redux/hero/hero-operations';
-import InfoModal from 'shared/components/Modal/InfoModal';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import HeroForm from 'components/HeroForm/HeroForm';
-import { useSelector } from 'react-redux';
-import { selectHeroById, selectError } from 'redux/hero/hero-selectors';
+import { selectHeroById, selectIsError } from 'redux/hero/hero-selectors';
 import notify from 'utils/notify';
-import { useSelect } from '@mui/base';
 
 const HeroOptions = ({ selectedImage }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteImgModalOpen, setIsDeleteImgModalOpen] = useState(false);
-  const isError = useSelector(selectError);
+  const isError = useSelector(selectIsError);
   const dispatch = useDispatch();
   const { id } = useParams();
   const selectedHero = useSelector(state => selectHeroById(state, id));

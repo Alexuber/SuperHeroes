@@ -1,10 +1,9 @@
-import HeroesList from 'components/HeroesList/HeroesList';
-import Container from '@mui/material/Container';
-import BasicPagination from 'components/Pagination/Pagination';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import HeroesList from 'components/HeroesList/HeroesList';
+import BasicPagination from 'components/Pagination/Pagination';
+import { Typography, Box, Container } from '@mui/material';
 import { selectAllHeroes } from 'redux/hero/hero-selectors';
-import { Typography, Box } from '@mui/material';
 import banner from 'assets/img/banner.webp';
 
 const HomePage = () => {

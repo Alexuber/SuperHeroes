@@ -1,7 +1,4 @@
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import { Box } from '@mui/system';
+import { Typography, Box, AppBar, Toolbar } from '@mui/material';
 import BasicMenu from 'components/Menu/Menu';
 
 const UserBar = () => {
@@ -15,9 +12,7 @@ const UserBar = () => {
             alignItems: 'center',
           }}
         >
-          <Box
-          //   className={styles.box}
-          >
+          <Box>
             <BasicMenu />
           </Box>
           <Typography variant="h6" color="inherit" noWrap>
