@@ -39,7 +39,6 @@ const HomePage = () => {
             display: 'block',
             height: '50px',
             color: 'white',
-            background: 'rgb(25,33,251)',
             background:
               'linear-gradient(90deg, rgba(25,33,251,1) 0%, rgba(255,0,168,1) 100%)',
           }}
