@@ -30,7 +30,16 @@ const HomePage = () => {
       style={{ position: 'relative', minHeight: '100vh' }}
     >
       <main>
-        <Typography>All your favorite heroes here!</Typography>
+        <Typography
+          variant="h4"
+          sx={{
+            textAlign: 'center',
+            margin: '30px 0',
+            textTransform: 'uppercase',
+          }}
+        >
+          All your favorite heroes here!
+        </Typography>
         <HeroesList heroes={currentPageHeroes} />
       </main>
       <div

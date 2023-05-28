@@ -20,6 +20,11 @@ const style = {
 };
 
 const InfoModal = ({ open, onClose = () => {}, children, title = '' }) => {
+  // const handleBackdropClick = ({ target, currentTarget, code }) => {
+  //   if (target !== currentTarget || code === 'Escape') {
+  //     onClose();
+  //   }
+  // };
   return (
     <div>
       <Modal
@@ -29,9 +34,11 @@ const InfoModal = ({ open, onClose = () => {}, children, title = '' }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography variant="h5" sx={{ marginBottom: '50px' }}>
-            {title}
-          </Typography>
+          {title && (
+            <Typography variant="h5" sx={{ marginBottom: '20px' }}>
+              {title}
+            </Typography>
+          )}
           <Box>{children}</Box>
         </Box>
       </Modal>
