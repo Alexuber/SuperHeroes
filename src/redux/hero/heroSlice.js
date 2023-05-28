@@ -17,8 +17,6 @@ const heroSlice = createSlice({
     builder
       // -------- getHeroes ---------
       .addCase(heroesService.getHeroes.fulfilled, (state, { payload }) => {
-        console.log('🆑  payload:', payload);
-
         state.heroes = payload;
       })
 
@@ -34,16 +32,45 @@ const heroSlice = createSlice({
 
       // ------- changeHeroById -------
       .addCase(heroesService.changeHeroById.fulfilled, (state, { payload }) => {
-        state.heroes = state.heroes.map(results =>
-          results.id === payload.response.id ? payload.response : results
+        const heroIndex = state.heroes.findIndex(
+          hero => hero._id === payload._id
         );
+        if (heroIndex !== -1) {
+          state.heroes[heroIndex] = payload;
+        }
       })
 
       // ------- removeHero -------
       .addCase(heroesService.removeHero.fulfilled, (state, { payload }) => {
-        console.log('🆑  payload:', payload);
-        state.heroes = state.heroes.filter(hero => hero._id !== payload);
+        state.heroes = state.heroes.filter(hero => hero.id !== payload);
       })
+      // ------- removeImgById -------
+      .addCase(heroesService.removeImgById.fulfilled, (state, { payload }) => {
+        const { id, selectedImage } = payload;
+
+        state.heroes = state.heroes.map(hero => {
+          if (hero._id === id) {
+            return {
+              ...hero,
+              images: hero.images.filter(img => {
+                return img !== selectedImage;
+              }),
+            };
+          }
+          return hero;
+        });
+      })
+      // const updatedHeroes = state.heroes.map(hero => {
+      //   if (hero._id === payload.id) {
+      //     hero.images = hero.images.filter(
+      //       image => image !== payload.selectedImg
+      //     );
+      //   }
+      //   return hero;
+      // });
+
+      // Update the state with the modified heroes array
+      // state.heroes = updatedHeroes;
 
       .addMatcher(isAnyOf(...getActions('pending')), pendingHandler)
       .addMatcher(isAnyOf(...getActions('fulfilled')), fulfilledHandler)

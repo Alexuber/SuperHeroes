@@ -3,7 +3,8 @@ import { Button } from '@mui/material';
 import { Formik, Form, Field, FieldArray, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { addHero } from 'redux/hero/hero-operations';
+import { addHero, changeHeroById } from 'redux/hero/hero-operations';
+import { Typography } from '@mui/material';
 
 const regEx = /^[A-Za-z\s]+$/;
 
@@ -20,7 +21,7 @@ const validationSchema = Yup.object({
     .required('Real name is a required field'),
   origin_description: Yup.string()
     .min(3, '3 characters minimum')
-    .max(600, '600 characters maximum')
+    .max(1000, '1000 characters maximum')
     .required('Description is a required field'),
   catch_phrase: Yup.string()
     .min(3, '3 characters minimum')
@@ -30,38 +31,15 @@ const validationSchema = Yup.object({
     .of(
       Yup.string()
         .min(3, '3 characters minimum')
-        .max(30, '30 characters maximum')
+        .max(50, '50 characters maximum')
         .matches(regEx, 'English letters only')
         .label('Superpower')
     )
     .required('Superpowers are required')
     .min(1, 'Please add at least one superpower'),
-  images: Yup.array()
-    .of(
-      Yup.mixed().test('fileFormat', 'Invalid file format', function (value) {
-        if (value && value.length > 0) {
-          for (let i = 0; i < value.length; i++) {
-            const file = value[i];
-            const supportedFormats = [
-              //   'image/jpeg',
-              'image/jpg',
-              //   'image/png',
-              //   'image/webp',
-            ];
-            const isValidFormat = supportedFormats.includes(file.type);
-            if (!isValidFormat) {
-              return false;
-            }
-          }
-        }
-        return true;
-      })
-    )
-    .min(1, 'Please select at least one image')
-    .required('Please select at least one image'),
 });
 
-const HeroForm = () => {
+const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
   const dispatch = useDispatch();
 
   const handleSubmit = async (values, form) => {
@@ -80,6 +58,25 @@ const HeroForm = () => {
     // for (const pair of formData.entries()) {
     //   console.log(pair[0], pair[1]);
     // }
+    if (!selectedHero) {
+      if (images.length === 0) {
+        form.setFieldError('images', 'Please select at least one image');
+        return;
+      }
+    }
+
+    for (let i = 0; i < images.length; i++) {
+      const file = images[i];
+      const supportedFormats = ['image/jpg', 'image/jpeg', 'image/png'];
+      if (!supportedFormats.includes(file.type)) {
+        form.setFieldError(
+          'images',
+          'Invalid file format. Only JPG, JPEG, PNG, and WEBP formats are allowed.'
+        );
+        return;
+      }
+    }
+
     sendHero(formData);
     form.resetForm();
   };
@@ -89,7 +86,7 @@ const HeroForm = () => {
     const real_name = data.get('real_name');
     const origin_description = data.get('origin_description');
     const catch_phrase = data.get('catch_phrase');
-    const superpowers = data.getAll('superpowers');
+    const superpowers = data.get('superpowers').split(',');
     const images = getFiles(data, 'images');
 
     const formData = {
@@ -101,8 +98,14 @@ const HeroForm = () => {
       images,
     };
 
-    console.log('🆑  formData:', formData);
-    dispatch(addHero(formData));
+    if (selectedHero) {
+      const id = selectedHero._id;
+
+      dispatch(changeHeroById({ formData, id }));
+      handleSubmitEditHero();
+    } else {
+      dispatch(addHero(formData));
+    }
   };
 
   const getFiles = (formData, field) => {
@@ -119,11 +122,11 @@ const HeroForm = () => {
   return (
     <Formik
       initialValues={{
-        nickname: '',
-        real_name: '',
-        origin_description: '',
-        catch_phrase: '',
-        superpowers: [],
+        nickname: selectedHero ? selectedHero.nickname : '',
+        real_name: selectedHero ? selectedHero.real_name : '',
+        origin_description: selectedHero ? selectedHero.origin_description : '',
+        catch_phrase: selectedHero ? selectedHero.catch_phrase : '',
+        superpowers: selectedHero ? selectedHero.superpowers : [],
         images: [],
       }}
       validationSchema={validationSchema}
@@ -137,6 +140,7 @@ const HeroForm = () => {
             maxWidth: '400px',
           }}
         >
+          {!selectedHero && <Typography>Add new SuperHero!</Typography>}
           <div style={{ marginBottom: '1rem' }}>
             <label htmlFor="nickname">Nickname</label>
             <Field

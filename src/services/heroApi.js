@@ -35,9 +35,11 @@ const fetchHeroById = async id => {
   }
 };
 
-const editHeroById = async data => {
+const editHeroById = async (data, id) => {
   try {
-    const { data: result } = await instance.put(`/${data.id}`, data);
+    const { data: result } = await instance.put(`/${data.id}`, data.formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
     return result;
   } catch (error) {
     throw error;
@@ -45,8 +47,6 @@ const editHeroById = async data => {
 };
 
 const deleteHeroById = async id => {
-  console.log('🆑  id:', id);
-
   try {
     const { data } = await instance.delete(`/${id}`);
     return data;
@@ -56,9 +56,13 @@ const deleteHeroById = async id => {
 };
 
 const deleteImageById = async data => {
+  const modifiedSelectedImage = data.selectedImage
+    .replace(/\\/g, '')
+    .replace('images', '');
+
   try {
-    const { data: result } = await instance.delete(`/${data.id}`, data);
-    return result;
+    await instance.delete(`/${data.id}/images/${modifiedSelectedImage}`);
+    return data;
   } catch (error) {
     throw error;
   }

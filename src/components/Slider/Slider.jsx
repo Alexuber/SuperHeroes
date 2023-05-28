@@ -3,12 +3,10 @@ import Carousel from 'react-material-ui-carousel';
 import { Paper } from '@mui/material';
 import styles from './Slider.module.scss';
 import { Typography } from '@mui/material';
-
 const IMAGE_BASE_URL = 'http://localhost:3001/';
 
 function Slider(props) {
   const images = props.images;
-
   return (
     <>
       <Typography variant="h2" sx={{ textAlign: 'center' }}>
@@ -16,20 +14,14 @@ function Slider(props) {
       </Typography>
       <Carousel
         sx={{ maxWidth: '900px', margin: '0 auto' }}
-        navButtonsProps={{
-          style: {
-            opacity: '1',
-          },
-        }}
-        // next={(next, active) =>
-        //   console.log(`we left ${active}, and are now at ${next}`)
-        // }
+        navButtonsAlwaysVisible
+        next={(next, active) => props.currentImg(images[active])}
         // prev={(prev, active) =>
         //   console.log(`we left ${active}, and are now at ${prev}`)
         // }
       >
         {images.map((item, i) => (
-          <Item key={i} item={item} />
+          <Item key={i} item={item} onDelete={props.onDelete} />
         ))}
       </Carousel>
     </>

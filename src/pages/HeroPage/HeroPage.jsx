@@ -8,13 +8,23 @@ import { useParams } from 'react-router-dom';
 import { selectHeroById } from 'redux/hero/hero-selectors';
 import HeroOptions from 'components/HeroOptions/HeroOptions';
 import { Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 
 const HeroPage = () => {
+  const [selectedImage, SetSelectedImage] = useState('');
   const { id } = useParams();
   const superHero = useSelector(state => selectHeroById(state, id));
 
+  useEffect(() => {
+    SetSelectedImage(superHero.images[0]);
+  }, [superHero.images]);
+
   const location = useLocation();
   const backLinkHref = location.state?.from ?? '/';
+
+  const handleSelectImage = img => {
+    SetSelectedImage(img);
+  };
 
   if (!superHero) {
     return <Typography>Hero not found</Typography>;
@@ -25,8 +35,11 @@ const HeroPage = () => {
       <main>
         <BackLink to={backLinkHref}>Back</BackLink>
         <HeroInfo hero={superHero} />
-        <Slider images={superHero.images} />
-        <HeroOptions />
+        <Slider images={superHero.images} currentImg={handleSelectImage} />
+        <HeroOptions
+          sx={{ position: 'relative' }}
+          selectedImage={selectedImage}
+        />
       </main>
     </Container>
   );
