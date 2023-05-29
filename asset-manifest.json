@@ -1,22 +1,23 @@
 {
   "files": {
     "main.css": "/superHeroes/static/css/main.e2e2dc8e.css",
-    "main.js": "/superHeroes/static/js/main.5c6d1906.js",
-    "static/js/997.3e232adc.chunk.js": "/superHeroes/static/js/997.3e232adc.chunk.js",
-    "static/css/864.e2dde966.chunk.css": "/superHeroes/static/css/864.e2dde966.chunk.css",
-    "static/js/864.0b43bcb3.chunk.js": "/superHeroes/static/js/864.0b43bcb3.chunk.js",
+    "main.js": "/superHeroes/static/js/main.d1093a7b.js",
+    "static/js/997.9688731e.chunk.js": "/superHeroes/static/js/997.9688731e.chunk.js",
+    "static/css/196.6d3a9f78.chunk.css": "/superHeroes/static/css/196.6d3a9f78.chunk.css",
+    "static/js/196.c76159ba.chunk.js": "/superHeroes/static/js/196.c76159ba.chunk.js",
     "static/js/749.20ddb83f.chunk.js": "/superHeroes/static/js/749.20ddb83f.chunk.js",
     "static/js/295.ea4f79d6.chunk.js": "/superHeroes/static/js/295.ea4f79d6.chunk.js",
     "static/js/908.65333576.chunk.js": "/superHeroes/static/js/908.65333576.chunk.js",
     "static/js/7.b3e6e08d.chunk.js": "/superHeroes/static/js/7.b3e6e08d.chunk.js",
     "static/js/437.afa2a851.chunk.js": "/superHeroes/static/js/437.afa2a851.chunk.js",
     "static/media/banner.webp": "/superHeroes/static/media/banner.9454c51d5bda993987bf.webp",
+    "static/media/noImage.jpg": "/superHeroes/static/media/noImage.5882c20d3ddf67c36e30.jpg",
     "index.html": "/superHeroes/index.html",
     "main.e2e2dc8e.css.map": "/superHeroes/static/css/main.e2e2dc8e.css.map",
-    "main.5c6d1906.js.map": "/superHeroes/static/js/main.5c6d1906.js.map",
-    "997.3e232adc.chunk.js.map": "/superHeroes/static/js/997.3e232adc.chunk.js.map",
-    "864.e2dde966.chunk.css.map": "/superHeroes/static/css/864.e2dde966.chunk.css.map",
-    "864.0b43bcb3.chunk.js.map": "/superHeroes/static/js/864.0b43bcb3.chunk.js.map",
+    "main.d1093a7b.js.map": "/superHeroes/static/js/main.d1093a7b.js.map",
+    "997.9688731e.chunk.js.map": "/superHeroes/static/js/997.9688731e.chunk.js.map",
+    "196.6d3a9f78.chunk.css.map": "/superHeroes/static/css/196.6d3a9f78.chunk.css.map",
+    "196.c76159ba.chunk.js.map": "/superHeroes/static/js/196.c76159ba.chunk.js.map",
     "749.20ddb83f.chunk.js.map": "/superHeroes/static/js/749.20ddb83f.chunk.js.map",
     "295.ea4f79d6.chunk.js.map": "/superHeroes/static/js/295.ea4f79d6.chunk.js.map",
     "908.65333576.chunk.js.map": "/superHeroes/static/js/908.65333576.chunk.js.map",
@@ -25,6 +26,6 @@
   },
   "entrypoints": [
     "static/css/main.e2e2dc8e.css",
-    "static/js/main.5c6d1906.js"
+    "static/js/main.d1093a7b.js"
   ]
 }
