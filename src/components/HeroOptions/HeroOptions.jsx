@@ -33,6 +33,10 @@ const HeroOptions = ({ selectedImage }) => {
   };
 
   const handleDeleteImg = async () => {
+    if (selectedHero.images.length === 0) {
+      setIsDeleteImgModalOpen(false);
+      return notify('error', 'Please add images!');
+    }
     const data = { id, selectedImage };
     await dispatch(removeImgById(data));
     if (!isError) {

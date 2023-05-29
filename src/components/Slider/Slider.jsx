@@ -1,29 +1,41 @@
 import Carousel from 'react-material-ui-carousel';
-import { Typography, Paper } from '@mui/material';
+import { Typography, Paper, Box } from '@mui/material';
 import styles from './Slider.module.scss';
-
+import noImage from 'assets/img/noImage.jpg';
 const IMAGE_BASE_URL = 'https://super-hero-ihdu.onrender.com/';
 
 function Slider(props) {
   const images = props.images;
+
   return (
-    <>
-      <Typography
-        variant="h2"
-        sx={{ textAlign: 'center', marginBottom: '60px' }}
-      >
-        Gallery
-      </Typography>
-      <Carousel
-        sx={{ maxWidth: '900px', margin: '0 auto' }}
-        navButtonsAlwaysVisible
-        next={(next, active) => props.currentImg(images[active])}
-      >
-        {images.map((item, i) => (
-          <Item key={i} item={item} onDelete={props.onDelete} />
-        ))}
-      </Carousel>
-    </>
+    <Box>
+      {images.length !== 0 ? (
+        <Box>
+          <Typography
+            variant="h2"
+            sx={{ textAlign: 'center', marginBottom: '60px' }}
+          >
+            Gallery
+          </Typography>
+          <Carousel
+            sx={{ maxWidth: '900px', margin: '0 auto' }}
+            navButtonsAlwaysVisible
+            next={(next, active) => props.currentImg(images[active])}
+          >
+            {images.map((item, i) => (
+              <Item key={i} item={item} onDelete={props.onDelete} />
+            ))}
+          </Carousel>
+        </Box>
+      ) : (
+        <img
+          src={noImage}
+          alt="backdrop no img"
+          width="400px"
+          className={styles.noImg}
+        />
+      )}
+    </Box>
   );
 }
 
