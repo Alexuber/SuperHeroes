@@ -8,20 +8,21 @@ import {
   Button,
   Typography,
 } from '@mui/material/';
+import noImage from 'assets/img/noImage.jpg';
 
 const IMAGE_URL = 'https://super-hero-ihdu.onrender.com/';
 
 export default function HeroCrad({ hero = {} }) {
   const location = useLocation();
-
   const { nickname, images, _id } = hero;
+  const titleImg = images.length === 0 ? noImage : `${IMAGE_URL}${images[0]}`;
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
         alt="hero photo"
         height="320"
-        image={`${IMAGE_URL}${images[0]}`}
+        image={titleImg}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

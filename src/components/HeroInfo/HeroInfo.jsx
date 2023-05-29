@@ -3,6 +3,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { Box, Typography } from '@mui/material';
 import PowersList from 'components/PowersList/PowersList';
 import styles from './HeroInfo.module.scss';
+import noImage from 'assets/img/noImage.jpg';
 
 const IMAGE_BASE_URL = 'https://super-hero-ihdu.onrender.com/';
 
@@ -15,8 +16,10 @@ const HeroInfo = ({ hero }) => {
     catch_phrase,
     images,
   } = hero;
+
   const theme = useTheme();
   const isScreenWidthLessThan800 = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
     <Box sx={{ marginBottom: '60px' }}>
       <Typography
@@ -36,7 +39,7 @@ const HeroInfo = ({ hero }) => {
         }}
       >
         <img
-          src={`${IMAGE_BASE_URL}${images[0]}`}
+          src={images.length !== 0 ? `${IMAGE_BASE_URL}${images[0]}` : noImage}
           alt="main hero avatar"
           width="320px"
           height="480px"
