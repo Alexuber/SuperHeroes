@@ -1,12 +1,13 @@
 import { useLocation, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Container, Typography } from '@mui/material';
+import { Container } from '@mui/material';
 import BackLink from 'shared/components/BackLink/BackLink';
 import Slider from 'components/Slider/Slider';
 import HeroInfo from 'components/HeroInfo/HeroInfo';
 import HeroOptions from 'components/HeroOptions/HeroOptions';
 import { selectHeroById } from 'redux/hero/hero-selectors';
+import { Loader } from 'shared/components/Loader/Loader';
 import noImage from 'assets/img/noImage.jpg';
 import styles from './HeroPage.module.scss';
 
@@ -29,7 +30,7 @@ const HeroPage = () => {
   };
 
   if (!superHero) {
-    return <Typography>Hero not found</Typography>;
+    return <Loader />;
   }
 
   return (

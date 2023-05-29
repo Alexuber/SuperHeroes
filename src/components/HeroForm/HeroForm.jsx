@@ -1,4 +1,3 @@
-import React from 'react';
 import { Formik, Form, Field, FieldArray, ErrorMessage } from 'formik';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -10,6 +9,7 @@ import notify from 'utils/notify';
 import validateImages from 'utils/validateImages';
 import getFormDataFiles from 'utils/getFormDataFiles';
 import { validationSchema } from 'utils/validationSchema';
+import styles from './HeroForm.module.scss';
 
 const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
   const isError = useSelector(selectIsError);
@@ -111,13 +111,13 @@ const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
                 Add new SuperHero!
               </Typography>
             )}
-            <Box style={{ marginBottom: '1rem' }}>
+            <Box style={{ marginBottom: '16px' }}>
               <Typography htmlFor="nickname">Nickname</Typography>
               <Field
                 type="text"
                 id="nickname"
                 name="nickname"
-                style={{ width: '100%', padding: '0.5rem' }}
+                className={styles.textField__input}
               />
               <ErrorMessage
                 name="nickname"
@@ -125,13 +125,13 @@ const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
                 style={{ color: 'red' }}
               />
             </Box>
-            <Box style={{ marginBottom: '1rem' }}>
+            <Box style={{ marginBottom: '16px' }}>
               <Typography htmlFor="real_name">Real Name</Typography>
               <Field
                 type="text"
                 id="real_name"
                 name="real_name"
-                style={{ width: '100%', padding: '0.5rem' }}
+                className={styles.textField__input}
               />
               <ErrorMessage
                 name="real_name"
@@ -139,13 +139,13 @@ const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
                 style={{ color: 'red' }}
               />
             </Box>
-            <Box style={{ marginBottom: '1rem' }}>
+            <Box style={{ marginBottom: '16px' }}>
               <Typography htmlFor="origin_description">Description</Typography>
               <Field
                 as="textarea"
                 id="origin_description"
                 name="origin_description"
-                style={{ width: '100%', padding: '0.5rem' }}
+                className={styles.textField__input}
               />
               <ErrorMessage
                 name="origin_description"
@@ -153,13 +153,13 @@ const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
                 style={{ color: 'red' }}
               />
             </Box>
-            <Box style={{ marginBottom: '1rem' }}>
+            <Box style={{ marginBottom: '16px' }}>
               <Typography htmlFor="catch_phrase">Catch phrase</Typography>
               <Field
                 as="textarea"
                 id="catch_phrase"
                 name="catch_phrase"
-                style={{ width: '100%', padding: '0.5rem' }}
+                className={styles.textField__input}
               />
               <ErrorMessage
                 name="catch_phrase"
@@ -167,31 +167,41 @@ const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
                 style={{ color: 'red' }}
               />
             </Box>
-
-            <Box style={{ marginBottom: '1rem' }}>
+            <Box style={{ marginBottom: '16px' }}>
               <Typography>Superpowers</Typography>
               <FieldArray name="superpowers">
                 {({ push, remove, form }) => (
                   <div>
                     {form.values.superpowers.map((_, index) => (
-                      <Box
-                        key={index}
-                        style={{ display: 'flex', with: '100%' }}
-                      >
+                      <div key={index}>
                         <Field
-                          name={`superpowers[${index}]`}
-                          style={{ width: '100%', padding: '0.5rem' }}
+                          name={`superpowers.${index}`}
+                          className={styles.textField__input}
                         />
-                        {index > 0 && (
-                          <button type="button" onClick={() => remove(index)}>
-                            Remove
-                          </button>
-                        )}
-                      </Box>
+                        <Button
+                          variant="outlined"
+                          type="button"
+                          onClick={() => remove(index)}
+                        >
+                          -
+                        </Button>
+                        <Button
+                          variant="outlined"
+                          type="button"
+                          onClick={() => push('')}
+                        >
+                          +
+                        </Button>
+                      </div>
                     ))}
-                    <button type="button" onClick={() => push('')}>
+                    <Button
+                      variant="outlined"
+                      sx={{ marginTop: '8px' }}
+                      type="button"
+                      onClick={() => push('')}
+                    >
                       Add Superpower
-                    </button>
+                    </Button>
                   </div>
                 )}
               </FieldArray>
@@ -200,10 +210,11 @@ const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
                 component="div"
                 style={{ color: 'red' }}
               />
-            </Box>
-            <Box style={{ marginBottom: '1rem' }}>
+            </Box>{' '}
+            <Box style={{ marginBottom: '16px' }}>
               <label htmlFor="images">Images</label>
               <input
+                className={styles.textField__input}
                 type="file"
                 id="images"
                 name="images"
@@ -213,7 +224,7 @@ const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
                   const fileList = Array.from(event.target.files);
                   setFieldValue('images', fileList);
                 }}
-                style={{ padding: '0.5rem' }}
+                style={{ padding: '8px' }}
               />
               <ErrorMessage
                 name="images"
@@ -221,7 +232,12 @@ const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
                 style={{ color: 'red' }}
               />
             </Box>
-            <Button type="submit" variant="contained" color="primary">
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              sx={{ width: '160px', margin: '0 auto' }}
+            >
               {!isLoading && 'Submitt'}
               {isLoading && (
                 <Loader with="25px" height="25px" color="#e0e1e6" />

@@ -7,7 +7,11 @@ import { Box, Button, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { removeHero, removeImgById } from 'redux/hero/hero-operations';
-import { selectHeroById, selectIsError } from 'redux/hero/hero-selectors';
+import {
+  selectHeroById,
+  selectIsError,
+  selectIsLoading,
+} from 'redux/hero/hero-selectors';
 import notify from 'utils/notify';
 
 const HeroOptions = ({ selectedImage }) => {
@@ -15,6 +19,7 @@ const HeroOptions = ({ selectedImage }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteImgModalOpen, setIsDeleteImgModalOpen] = useState(false);
   const isError = useSelector(selectIsError);
+  const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
   const { id } = useParams();
   const selectedHero = useSelector(state => selectHeroById(state, id));
@@ -142,7 +147,11 @@ const HeroOptions = ({ selectedImage }) => {
       <InfoModal
         open={isEditModalOpen}
         title="Edit your SuperHero"
-        onClose={() => setIsEditModalOpen(false)}
+        onClose={() => {
+          if (!isLoading) {
+            setIsEditModalOpen(false);
+          }
+        }}
       >
         <HeroForm
           selectedHero={selectedHero}
