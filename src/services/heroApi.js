@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://classy-bavarois-88f17d.netlify.app/api/heroes';
+const BASE_URL = 'https://super-heroes-backend.vercel.app/api/heroes';
 
 const instance = axios.create({
   baseURL: BASE_URL,
