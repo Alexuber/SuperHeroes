@@ -5,7 +5,7 @@ import PowersList from 'components/PowersList/PowersList';
 import styles from './HeroInfo.module.scss';
 import noImage from 'assets/img/noImage.jpg';
 
-const IMAGE_BASE_URL = 'https://super-hero-ihdu.onrender.com/';
+const IMAGE_BASE_URL = 'https://classy-bavarois-88f17d.netlify.app/';
 
 const HeroInfo = ({ hero }) => {
   const {

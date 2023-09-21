@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://super-hero-ihdu.onrender.com/api/heroes';
+const BASE_URL = 'https://classy-bavarois-88f17d.netlify.app/api/heroes';
 
 const instance = axios.create({
   baseURL: BASE_URL,

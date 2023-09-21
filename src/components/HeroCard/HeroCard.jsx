@@ -10,7 +10,7 @@ import {
 } from '@mui/material/';
 import noImage from 'assets/img/noImage.jpg';
 
-const IMAGE_URL = 'https://super-hero-ihdu.onrender.com/';
+const IMAGE_URL = 'https://classy-bavarois-88f17d.netlify.app/';
 
 export default function HeroCrad({ hero = {} }) {
   const location = useLocation();
