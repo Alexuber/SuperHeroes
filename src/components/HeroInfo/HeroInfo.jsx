@@ -5,7 +5,7 @@ import PowersList from 'components/PowersList/PowersList';
 import styles from './HeroInfo.module.scss';
 import noImage from 'assets/img/noImage.jpg';
 
-const IMAGE_BASE_URL = 'super-heroes-backend-c2hflesyw-alexuber.vercel.app/';
+const IMAGE_BASE_URL = 'https://sup-back.onrender.com';
 
 const HeroInfo = ({ hero }) => {
   const {
