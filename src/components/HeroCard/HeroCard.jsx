@@ -10,7 +10,7 @@ import {
 } from '@mui/material/';
 import noImage from 'assets/img/noImage.jpg';
 
-const IMAGE_URL = 'https://classy-bavarois-88f17d.netlify.app/';
+const IMAGE_URL = 'super-heroes-backend-c2hflesyw-alexuber.vercel.app/';
 
 export default function HeroCrad({ hero = {} }) {
   const location = useLocation();
