@@ -13,9 +13,25 @@
   border: 1px solid #6388ee;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  padding: 8px;
 }
 
 .textField__label {
   display: block;
   margin-bottom: 0.25rem;
+}
+
+.container {
+  margin-bottom: 16px;
+}
+
+.errorMessage {
+  color: red;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
 }

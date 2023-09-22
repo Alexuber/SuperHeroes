@@ -27,7 +27,7 @@ const HeroOptions = ({ selectedImage }) => {
   const navigate = useNavigate();
 
   const handleDeleteHero = async () => {
-    await dispatch(removeHero(id));
+    dispatch(removeHero(id));
     if (!isError) {
       notify('success', 'SuperHero deleted!');
     } else {
@@ -43,7 +43,7 @@ const HeroOptions = ({ selectedImage }) => {
       return notify('error', 'Please add images!');
     }
     const data = { id, selectedImage };
-    await dispatch(removeImgById(data));
+    removeImgById(data);
     if (!isError) {
       notify('success', 'Image deleted!');
     } else {

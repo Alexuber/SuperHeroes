@@ -5,7 +5,8 @@ import PowersList from 'components/PowersList/PowersList';
 import styles from './HeroInfo.module.scss';
 import noImage from 'assets/img/noImage.jpg';
 
-const IMAGE_BASE_URL = 'http://localhost:3001/';
+const IMAGE_BASE_URL =
+  'https://super-heroes-backend-c2hflesyw-alexuber.vercel.app/';
 
 const HeroInfo = ({ hero }) => {
   const {
@@ -43,7 +44,7 @@ const HeroInfo = ({ hero }) => {
           alt="main hero avatar"
           width="320px"
           height="480px"
-          style={{ borderRadius: '8px' }}
+          className={styles.mainAvatar}
         />
         <Box sx={{ width: '100%' }}>
           <Typography sx={{ marginBottom: '10px' }} variant="h5">
