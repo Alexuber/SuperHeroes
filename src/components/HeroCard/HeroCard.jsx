@@ -10,7 +10,7 @@ import {
 } from '@mui/material/';
 import noImage from 'assets/img/noImage.jpg';
 
-const IMAGE_URL = 'https://super-heroes-backend.vercel.app/';
+const IMAGE_URL = 'https://super-hero-f7yh.onrender.com/';
 
 export default function HeroCrad({ hero = {} }) {
   const location = useLocation();
