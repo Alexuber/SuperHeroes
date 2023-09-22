@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://sup-back.onrender.com/api/heroes';
+const BASE_URL = 'http://localhost:3001/api/heroes';
 
 const instance = axios.create({
   baseURL: BASE_URL,
@@ -57,13 +57,16 @@ const deleteHeroById = async id => {
 
 const deleteImageById = async data => {
   const modifiedSelectedImage = data.selectedImage
-    .replace(/\\/g, '')
+    .replace(/\\\\/g, '\\')
     .replace('images', '');
 
   try {
     await instance.delete(`${data.id}/images${modifiedSelectedImage}`);
+    console.log('data -->', data);
+
     return data;
   } catch (error) {
+    console.log('data -->', data);
     throw error;
   }
 };
