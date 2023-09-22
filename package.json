@@ -2,7 +2,7 @@
   "name": "super-heroes",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Alexuber.github.io/superHeroes/",
+  "homepage": "https://super-hero-f7yh.onrender.com/",
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
