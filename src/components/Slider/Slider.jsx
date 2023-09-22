@@ -3,7 +3,7 @@ import { Typography, Paper, Box } from '@mui/material';
 import styles from './Slider.module.scss';
 import noImage from 'assets/img/noImage.jpg';
 const IMAGE_BASE_URL =
-  'https://super-heroes-backend-c2hflesyw-alexuber.vercel.app/';
+  'https://super-heroes-backend-git-main-alexuber.vercel.app/';
 
 function Slider(props) {
   const images = props.images;
