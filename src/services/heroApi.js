@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL =
-  'https://super-heroes-backend-c2hflesyw-alexuber.vercel.app/api/heroes';
+  'https://super-heroes-backend-git-main-alexuber.vercel.app/api/heroes';
 
 const instance = axios.create({
   baseURL: BASE_URL,
