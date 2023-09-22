@@ -10,7 +10,7 @@ import {
 } from '@mui/material/';
 import noImage from 'assets/img/noImage.jpg';
 
-const IMAGE_URL = 'http://localhost:3001/';
+const IMAGE_URL = 'https://super-heroes-backend-c2hflesyw-alexuber.vercel.app/';
 
 export default function HeroCrad({ hero = {} }) {
   const location = useLocation();

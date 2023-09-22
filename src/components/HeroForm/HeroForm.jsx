@@ -70,12 +70,12 @@ const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
   };
 
   const editHeroInfo = async data => {
-    await dispatch(changeHeroById(data));
+    dispatch(changeHeroById(data));
     handleSubmitEditHero();
   };
 
   const addNewHero = async formData => {
-    await dispatch(addHero(formData));
+    dispatch(addHero(formData));
   };
 
   return (
@@ -95,14 +95,7 @@ const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
         onSubmit={handleSubmit}
       >
         {({ values, setFieldValue }) => (
-          <Form
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              maxWidth: '400px',
-              margin: '0 auto',
-            }}
-          >
+          <Form className={styles.form}>
             {!selectedHero && (
               <Typography
                 sx={{ marginBottom: '20px', textAlign: 'center' }}
@@ -111,7 +104,7 @@ const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
                 Add new SuperHero!
               </Typography>
             )}
-            <Box style={{ marginBottom: '16px' }}>
+            <Box className={styles.container}>
               <Typography htmlFor="nickname">Nickname</Typography>
               <Field
                 type="text"
@@ -122,10 +115,10 @@ const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
               <ErrorMessage
                 name="nickname"
                 component="div"
-                style={{ color: 'red' }}
+                className={styles.textField__input}
               />
             </Box>
-            <Box style={{ marginBottom: '16px' }}>
+            <Box className={styles.container}>
               <Typography htmlFor="real_name">Real Name</Typography>
               <Field
                 type="text"
@@ -136,10 +129,10 @@ const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
               <ErrorMessage
                 name="real_name"
                 component="div"
-                style={{ color: 'red' }}
+                className={styles.errorMessage}
               />
             </Box>
-            <Box style={{ marginBottom: '16px' }}>
+            <Box className={styles.container}>
               <Typography htmlFor="origin_description">Description</Typography>
               <Field
                 as="textarea"
@@ -150,10 +143,10 @@ const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
               <ErrorMessage
                 name="origin_description"
                 component="div"
-                style={{ color: 'red' }}
+                className={styles.errorMessage}
               />
             </Box>
-            <Box style={{ marginBottom: '16px' }}>
+            <Box className={styles.container}>
               <Typography htmlFor="catch_phrase">Catch phrase</Typography>
               <Field
                 as="textarea"
@@ -164,10 +157,10 @@ const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
               <ErrorMessage
                 name="catch_phrase"
                 component="div"
-                style={{ color: 'red' }}
+                className={styles.errorMessage}
               />
             </Box>
-            <Box style={{ marginBottom: '16px' }}>
+            <Box className={styles.container}>
               <Typography>Superpowers</Typography>
               <FieldArray name="superpowers">
                 {({ push, remove, form }) => (
@@ -208,10 +201,10 @@ const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
               <ErrorMessage
                 name="superpowers"
                 component="div"
-                style={{ color: 'red' }}
+                className={styles.errorMessage}
               />
             </Box>{' '}
-            <Box style={{ marginBottom: '16px' }}>
+            <Box className={styles.container}>
               <label htmlFor="images">Images</label>
               <input
                 className={styles.textField__input}
@@ -224,12 +217,11 @@ const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
                   const fileList = Array.from(event.target.files);
                   setFieldValue('images', fileList);
                 }}
-                style={{ padding: '8px' }}
               />
               <ErrorMessage
                 name="images"
                 component="div"
-                style={{ color: 'red' }}
+                className={styles.errorMessage}
               />
             </Box>
             <Button

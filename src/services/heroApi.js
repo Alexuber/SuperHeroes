@@ -1,58 +1,39 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3001/api/heroes';
+const BASE_URL =
+  'https://super-heroes-backend-c2hflesyw-alexuber.vercel.app/api/heroes';
 
 const instance = axios.create({
   baseURL: BASE_URL,
 });
 
 const fetchAllHeroes = async () => {
-  try {
-    const { data } = await instance.get('/');
-    return data;
-  } catch (error) {
-    throw error;
-  }
+  const { data } = await instance.get('/');
+  return data;
 };
 
 const postHero = async data => {
-  try {
-    const { data: result } = await instance.post('/', data, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
-    return result;
-  } catch (error) {
-    throw error;
-  }
+  const { data: result } = await instance.post('/', data, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return result;
 };
 
 const fetchHeroById = async id => {
-  try {
-    const { data } = await instance.get(`/${id}`);
-    return data;
-  } catch (error) {
-    throw error;
-  }
+  const { data } = await instance.get(`/${id}`);
+  return data;
 };
 
 const editHeroById = async data => {
-  try {
-    const { data: result } = await instance.put(`/${data.id}`, data.formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
-    return result;
-  } catch (error) {
-    throw error;
-  }
+  const { data: result } = await instance.put(`/${data.id}`, data.formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return result;
 };
 
 const deleteHeroById = async id => {
-  try {
-    await instance.delete(`/${id}`);
-    return id;
-  } catch (error) {
-    throw error;
-  }
+  await instance.delete(`/${id}`);
+  return id;
 };
 
 const deleteImageById = async data => {
@@ -60,15 +41,10 @@ const deleteImageById = async data => {
     .replace(/\\\\/g, '\\')
     .replace('images', '');
 
-  try {
-    await instance.delete(`${data.id}/images${modifiedSelectedImage}`);
-    console.log('data -->', data);
+  await instance.delete(`${data.id}/images${modifiedSelectedImage}`);
+  console.log('data -->', data);
 
-    return data;
-  } catch (error) {
-    console.log('data -->', data);
-    throw error;
-  }
+  return data;
 };
 
 export const superHeroesAPI = {

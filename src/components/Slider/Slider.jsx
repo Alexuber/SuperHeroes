@@ -2,7 +2,8 @@ import Carousel from 'react-material-ui-carousel';
 import { Typography, Paper, Box } from '@mui/material';
 import styles from './Slider.module.scss';
 import noImage from 'assets/img/noImage.jpg';
-const IMAGE_BASE_URL = 'http://localhost:3001/';
+const IMAGE_BASE_URL =
+  'https://super-heroes-backend-c2hflesyw-alexuber.vercel.app/';
 
 function Slider(props) {
   const images = props.images;
