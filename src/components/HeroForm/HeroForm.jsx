@@ -1,19 +1,18 @@
 import { Formik, Form, Field, FieldArray, ErrorMessage } from 'formik';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { selectIsError, selectIsLoading } from 'redux/hero/hero-selectors';
+import { selectIsLoading } from 'redux/hero/hero-selectors';
 import { Loader } from 'shared/components/Loader/Loader';
 import { Button, Typography, Box } from '@mui/material';
 import { addHero, changeHeroById } from 'redux/hero/hero-operations';
-import notify from 'utils/notify';
 import validateImages from 'utils/validateImages';
 import getFormDataFiles from 'utils/getFormDataFiles';
 import { validationSchema } from 'utils/validationSchema';
 import styles from './HeroForm.module.scss';
 
 const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
-  const isError = useSelector(selectIsError);
   const isLoading = useSelector(selectIsLoading);
+
   const dispatch = useDispatch();
 
   const handleSubmit = async (values, form) => {
@@ -36,11 +35,6 @@ const HeroForm = ({ selectedHero, handleSubmitEditHero }) => {
     }
     validateImages(images, form);
     await sendHero(formData);
-    if (!isError) {
-      notify('success', 'Success!');
-    } else {
-      return notify('error', isError);
-    }
     form.resetForm();
   };
 

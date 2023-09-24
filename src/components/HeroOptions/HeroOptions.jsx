@@ -7,18 +7,13 @@ import { Box, Button, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { removeHero, removeImgById } from 'redux/hero/hero-operations';
-import {
-  selectHeroById,
-  selectIsError,
-  selectIsLoading,
-} from 'redux/hero/hero-selectors';
+import { selectHeroById, selectIsLoading } from 'redux/hero/hero-selectors';
 import notify from 'utils/notify';
 
 const HeroOptions = ({ selectedImage }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteImgModalOpen, setIsDeleteImgModalOpen] = useState(false);
-  const isError = useSelector(selectIsError);
   const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -28,11 +23,7 @@ const HeroOptions = ({ selectedImage }) => {
 
   const handleDeleteHero = async () => {
     dispatch(removeHero(id));
-    if (!isError) {
-      notify('success', 'SuperHero deleted!');
-    } else {
-      notify('error', isError);
-    }
+
     setIsDeleteModalOpen(false);
     navigate('/');
   };
@@ -43,12 +34,8 @@ const HeroOptions = ({ selectedImage }) => {
       return notify('error', 'Please add images!');
     }
     const data = { id, selectedImage };
-    removeImgById(data);
-    if (!isError) {
-      notify('success', 'Image deleted!');
-    } else {
-      notify('error', isError);
-    }
+    dispatch(removeImgById(data));
+
     setIsDeleteImgModalOpen(false);
   };
 
@@ -92,7 +79,9 @@ const HeroOptions = ({ selectedImage }) => {
           size="large"
           sx={{ width: '190px' }}
           startIcon={<DeleteIcon />}
-          onClick={() => setIsDeleteImgModalOpen(true)}
+          onClick={() => {
+            setIsDeleteImgModalOpen(true);
+          }}
         >
           Picture
         </Button>
