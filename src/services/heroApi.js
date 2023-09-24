@@ -39,9 +39,7 @@ const deleteImageById = async data => {
   const modifiedSelectedImage = data.selectedImage
     .replace(/\\\\/g, '\\')
     .replace('images', '');
-
-  await instance.delete(`${data.id}/images${modifiedSelectedImage}`);
-  console.log('data -->', data);
+  await instance.delete(`/${data.id}/images${modifiedSelectedImage}`);
 
   return data;
 };
